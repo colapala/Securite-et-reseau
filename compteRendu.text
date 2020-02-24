@@ -1,0 +1,25 @@
+Compte rendu 
+
+Première attaque :
+
+Nous avons observer directement le mot de passe de la connexion telnet. avec une communication ssh, le mot de passe aurait été encrypté.
+
+
+Deuxième attaque :
+
+Insertion de sql dans le champs de recherche.
+Lorsque la recherche est du type : 
+
+   Select * from Table Where Attribut like %'mot'%
+
+On peut inérer des requêtes et récupérer des informations sensibles en écrivant une requête dans le champ prévu.
+
+ex :
+   Select * from Table where Attribut like %' '; show tables; -- '
+
+
+on a besoin des -- à la fin pour mettre en commentaire le ' du LIKE, et ainsi faire en sorte que notre reqête soit reconnue.
+
+Il faut éviter les LIKE, et tester la chaîne de caractère fournie en entrée, si elle contient un mot clé SQL, il faut refuser la recherche.
+
+
